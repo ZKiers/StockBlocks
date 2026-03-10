@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\Stocks\Tables;
 
+use App\Models\Stock;
+use App\Services\StocksInfoService;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -34,7 +37,12 @@ class StocksTable
                 //
             ])
             ->recordActions([
-                //
+                Action::make('get_quote')
+                    ->action(function (Stock $record) {
+                        $service = new StocksInfoService;
+                        $service->quote($record);
+                        return null;
+                    })
             ])
             ->toolbarActions([
                 //
