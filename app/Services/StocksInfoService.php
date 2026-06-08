@@ -5,7 +5,10 @@ namespace App\Services;
 use App\Models\Quote;
 use App\Models\Stock;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class StocksInfoService
 {
@@ -25,21 +28,50 @@ class StocksInfoService
         return $response;
     }
 
-    public function quote(Stock $stock)
+    public function quote(Stock $stock): ?Quote
     {
-        $response = $this->get("/quote?symbol={$stock->symbol}");
-        $quote = Quote::create([
-            'stock_id' => $stock->id,
-            'price' => $response['c'],
-            'change' => $response['d'],
-            'percent_change' => $response['dp'],
-            'daily_high' => $response['h'],
-            'daily_low' => $response['l'],
-            'open' => $response['pc'],
-            'timestamp' => Carbon::createFromTimeStamp($response['t'])
-        ]);
-        dd($quote);
-        return $response;
+        try {
+            $response = $this->get("/quote?symbol={$stock->symbol}");
+
+            if (! is_array($response) || ! empty($response['error'])) {
+                return null;
+            }
+
+            // Finnhub returns all-zero values for unknown symbols.
+            if (($response['c'] ?? 0) == 0 && ($response['pc'] ?? 0) == 0) {
+                return null;
+            }
+
+            return Quote::create([
+                'stock_id' => $stock->id,
+                'price' => $response['c'] ?? null,
+                'change' => $response['d'] ?? null,
+                'percent_change' => $response['dp'] ?? null,
+                'daily_high' => $response['h'] ?? null,
+                'daily_low' => $response['l'] ?? null,
+                'open' => $response['o'] ?? null,
+                'previous_close' => $response['pc'] ?? null,
+                'timestamp' => empty($response['t']) ? now() : Carbon::createFromTimestamp($response['t']),
+            ]);
+        } catch (Throwable $e) {
+            Log::warning("Failed to fetch quote for {$stock->symbol}: {$e->getMessage()}");
+
+            return null;
+        }
+    }
+
+    /**
+     * Fetch and store a fresh quote for every given stock.
+     *
+     * @param  \Illuminate\Support\Collection<int, \App\Models\Stock>  $stocks
+     * @return int Number of quotes successfully stored.
+     */
+    public function quoteMany(Collection $stocks): int
+    {
+        return $stocks->reduce(
+            fn (int $count, Stock $stock) => $this->quote($stock) ? $count + 1 : $count,
+            0
+        );
     }
 
     public function exchangeLookup(string $exchange)

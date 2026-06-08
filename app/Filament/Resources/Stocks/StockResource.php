@@ -2,8 +2,6 @@
 
 namespace App\Filament\Resources\Stocks;
 
-use App\Filament\Resources\Stocks\Pages\CreateStock;
-use App\Filament\Resources\Stocks\Pages\EditStock;
 use App\Filament\Resources\Stocks\Pages\ListStocks;
 use App\Filament\Resources\Stocks\Schemas\StockForm;
 use App\Filament\Resources\Stocks\Tables\StocksTable;
@@ -20,6 +18,8 @@ class StockResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChartBar;
     protected static string|BackedEnum|null $activeNavigationIcon = Heroicon::ChartBar;
+
+    protected static ?int $navigationSort = 3;
 
     protected static ?string $recordTitleAttribute = 'display_symbol';
 

@@ -1,0 +1,105 @@
+It's a stock portfolio web application made in Laravel and FilamentPHP, both probably not the most recent version as I started this project a while ago.
+
+I've given you access to a workspace with a freshly cloned repo.
+
+I have a document where I laid out the features it needs and approximately in what order, it is in dutch but I have no doubt that you can manage that. If you'd like you can update Laravel, filament or anything really, I give you complete freedom as long as it ends up as described in the document.
+
+There is also the finnhub API token you need to test the Finnhub features so I will give you that as well, good luck! :)
+
+FINNHUB_API_KEY="d3a2qe9r01qli8jcdpb0d3a2qe9r01qli8jcdpbg"
+
+Document:
+
+Leerdoelen en Planning
+
+Softwareverdieping FilamentPHP
+
+Zoë Kiers
+
+Beschrijving
+
+Als eerst een korte beschrijving voor het doel van dit project. Het doel is om FilamentPHP
+
+onder de knie te krijgen, FilamentPHP is eigenlijk bedoelt voor admin panels, echter is het bijna een compleet full-stack framework geworden dus lijkt het mij slim om een project te bouwen die het framework iets meer buigt om zo meer van het framework te leren kennen.
+
+Het plan is nu om een real-time (of nagenoeg real-time) beurs en portfolio overzicht dashboard te bouwen.
+
+Leerdoelen
+
+API-integratie
+
+Specifiek: Een externe beurs-API gebruiken om data op te slaan en te vertonen in het project.
+
+Meetbaar: De actuele data is te zien in de dashboard.
+
+Acceptabel: Dit sluit aan bij mij interesse in financiële data en mijn doel om Filament buiten de standaard te gebruiken.
+
+Realistisch: Er zijn voldoende openbare beurs API's en informatie hoe dit te gebruiken is.
+
+Tijdsgebonden: Dit moet aan het einde van week 2 werken.
+
+Realtime functionaliteit
+
+Specifiek: Realtime weergave en updates van koersinformatie en de portfolio van de gebruiker.
+
+Meetbaar: Het dashboard werkt met Livewire-polling of websockets om data zonder handmatig te verversen bij te werken.
+
+Acceptabel: Dit kan uitdagend zijn maar lijkt wel volledig haalbaar binnen de projectduur.
+
+Realistisch: Polling kan in ieder geval geimplementeerd worden, websockets zal misschien iets lastiger zijn maar wel een nettere optie.
+
+Tijdsgebonden: Dit moet af zijn in week 4.
+
+Complexe relationele data beheren
+
+Specifiek: Ik wil leren hoe ik relaties tussen gebruikers, aandelen en transacties opzet en beheer in Filament.
+
+Meetbaar: Een gebruiker kan transacties invoeren en zijn portfolio-overzicht bekijken.
+
+Acceptabel: Dit is een kernfunctionaliteit van het project, en een van de sterkste punten van Filament.
+
+Realistisch: Filament ondersteunt relationele data out-of-the-box.
+
+Tijdsgebonden: Dit moet werken aan het einde van week 1.
+
+Visualiseren
+
+Specifiek: De informatie overzichtelijk en duidelijk overbrengen aan de gebruiker.
+
+Meetbaar: Er staat minstens 1 werkende grafiek in het dashboard die portfolio data toont.
+
+Acceptabel: Dit maakt het project gebruiksvriendelijk en nuttig.
+
+Realistisch: Filament heeft chart-integraties en voor andere visualisaties kan TailwindCSS gebruikt worden.
+
+Tijdsgebonden: Dit is gereed in week 3.
+
+Reflecteren op Filament buiten de standaard use-case
+
+Specifiek: Ontekken hoe geschikt Filament is voor een realtime beursdashboard.
+
+Meetbaar: Ik kan in mijn documentatie benoemen waar Filament sterk is en waar het tekort komt.
+
+Acceptabel: Dit past bij het leerdoel van verdieping in een framework.
+
+Realistisch: Tijdens de ontwikkeling noteer ik mijn ervaringen.
+
+Tijdsgebonden: Ik lever dit op in de einddocumentatie in week 4.
+
+Planning
+
+Week 1: Project opzetten, database ontwerpen, resource maken voor gebruikers, aandelen en transacties.
+
+Meetbaar resultaat: gebruiker kan transacties invoeren en zijn portfolio bekijken.
+
+Week 2: API-koppeling bouwen om actuele beurskoersen op te halen en te tonen.
+
+Meetbaar resultaat: dashboard toont actuele koersinformatie.
+
+Week 3: Grafieken en statistieken implementeren (portfolio waarde, winst/verlies).
+
+Meetbaar resultaat: minimaal 1 interactieve grafiek zichtbaar in Filament.
+
+Week 4: Realtime updates (polling of websockets) + styling afwerken, documentatie en reflectie.
+
+Meetbaar resultaat: volledig werkend dashboard met automatische updates en eindreflectie.
